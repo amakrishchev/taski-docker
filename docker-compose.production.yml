@@ -6,12 +6,12 @@ volumes:
 
 services:
   db:
-    image: postgres
+    image: postgres:13
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
-    image: alexmak9240/taski_backend
+    image: alexmak9240/taski_backend:latest
     env_file: .env
     depends_on:
       - db
@@ -19,12 +19,12 @@ services:
       - static:/backend_static
   frontend:
     env_file: .env
-    image: alexmak9240/taski_frontend
+    image: alexmak9240/taski_frontend:latest
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
-    image: alexmak9240/taski_gateway
+    image: alexmak9240/taski_gateway:latest
     volumes:
       - static:/staticfiles/
     ports:
